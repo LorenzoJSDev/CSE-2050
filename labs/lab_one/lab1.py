@@ -1,4 +1,9 @@
 def generic_hi(name="world"):
+    """
+    Docstring for generic_hi
+    
+    This function is named generic_hi!
+    """
     return f"Hello, {name}!"
 
 
