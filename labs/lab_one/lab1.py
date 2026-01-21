@@ -7,10 +7,13 @@ def generic_hi(name="world"):
     return f"Hello, {name}!"
 
 
+x = generic_hi()
+print(x)
 
-assert generic_hi() == "Hello world!"
 
-assert generic_hi("Ada") == "Hello Ada!"
+assert generic_hi() == "Hello, world!"
 
-assert generic_hi("CSE2050") == "Hello CSE2050!"
 
+assert generic_hi("Ada") == "Hello, Ada!"
+
+assert generic_hi("CSE2050") == "Hello, CSE2050!"
