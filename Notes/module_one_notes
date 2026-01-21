@@ -1,0 +1,54 @@
+Name: Lorenzo .S
+Date Created: 1-21-2026
+Last Modified:1-21-2026
+
+
+Module One Notes
+
+Data Structures
+
+Stacks: 
+        - Certain items one by one on top of eachother. 
+        - New items get put on top, items have to be deleted top down.
+        - Abstract data type with its own fucntionality
+
+
+List: 
+        - Abstract Data structure 
+
+Python is object oreitned 
+
+
+Statemnets:
+        - The smallest unit of code a interpreter can execute
+        EX: print("hello world") is a statement
+
+Values:
+        - Values basically just data
+        EX: x = 5 is a value
+
+Type:
+        - The type of value a value is
+        EX: is it a string, is it an in etc
+        EX: x = "Hello World" x is a string object
+        EX: x = isinstance(5,int) 
+
+Everything in python is an object, it is inherentally object oreinted
+
+Varibles:
+        - a storage loctaion for a certain value
+        - x = 5, 5 is the value, x is the varible
+        - Naming convetions:
+            * Must start with small leter or underscore
+            * Names are case sensitive
+
+
+Objects:
+        - An instance of a class with unique attributes
+
+Imutable vs Mutable
+    - Imuntable items can not have their values changed, Modifying them makes a new object with a new id (ints,floats, strings,tuples)
+    - Mutable objects can have there values changed(lists, dictionaries, sets)
+
+Every class, method and function should have a docstring!
+
