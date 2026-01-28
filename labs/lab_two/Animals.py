@@ -10,4 +10,10 @@ class Animal:
       return f"{self.name}, a {self.species}, says {self.sound}!"
 
    def __repr__(self) -> str:
+      return f"Animal({self.name}, {self.species}, {self.sound})"
+
+
+class Dog(Animal):
+   
+   def __init__(self, name, is_good_boy=True) -> None:
       pass
