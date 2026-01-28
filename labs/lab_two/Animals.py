@@ -67,7 +67,21 @@ class Dog(Animal):
       :rtype: str
       """
       return f"Dog({self.name})"
-   
+
+class Cat(Animal):
+   """
+   Docstring for Cat
+   """
+
+   def __repr__(self) -> str:
+      """
+      Docstring for __repr__
+      
+      :param self: Description
+      :return: Description
+      :rtype: str
+      """
+      return f"Cat({self.name}, {self.species}, {self.sound})"
 
 
    
