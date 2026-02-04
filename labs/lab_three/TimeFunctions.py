@@ -11,15 +11,17 @@ import time
 
 #=== Functions ===#
 
-
-def add_2_nums(p1, p2):
-    return p1 + p2
-
-def add_3_nums(p1, p2, p3):
-    return p1+p2+p3
-
-
 def time_function(func,args,n_trials=10) -> float:
+
+    """
+    Docstring for time_function
+    
+    :param func: Description
+    :param args: Description
+    :param n_trials: Description
+    :return: Description
+    :rtype: float
+    """
 
     minimum_run_time = float('inf')
 
@@ -35,8 +37,18 @@ def time_function(func,args,n_trials=10) -> float:
     return minimum_run_time
 
 
+
 def time_function_flexible(f, args: tuple, n_trials=10):
     
+    """
+    Docstring for time_function_flexible
+    
+    :param f: Description
+    :param args: Description
+    :type args: tuple
+    :param n_trials: Description
+    """
+
     minimum_run_time = float('inf')
 
     for i in range(n_trials): 
@@ -55,6 +67,12 @@ def time_function_flexible(f, args: tuple, n_trials=10):
 
 if __name__ == '__main__':
     def test_func(L):
+        """
+        Docstring for test_func
+        
+        :param L: Description
+        """
+
         for item in L:
             item *= 2
 
@@ -69,8 +87,4 @@ if __name__ == '__main__':
     print("t(L1) = {:.3g} ms".format(t1*1000))
 
     print("t(L2) = {:.3g} ms".format(t2*1000))
-
-    t3 =  time_function_flexible(add_2_nums, (3, 4))
-
-    print("t(3,4) = {:.3g} ms".format(t3*1000))
     
