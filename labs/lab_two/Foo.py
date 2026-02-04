@@ -1,4 +1,4 @@
-class Foo:
+class Foo():
     """This is the Foo Class"""
 
     def __init__(self, name: str, profession: str) -> None:

@@ -22,7 +22,7 @@ Notes for CSE 2050 module one which covers:
 Author: Lorenzo .S
 Contributors: [" "]
 Created: 01-20-2026
-Last Updated: 01-23-2026
+Last Updated: 01-28-2026
 
 """
 
@@ -129,6 +129,13 @@ L=[5,10]
 print(print_min_max(L))
 
 
+
+#---- 01-28-2026 Lecuture Notes ----#
+
+# by controlling only specific fucntions form module decreases the size of the module you are building
+# Ex: from calc import multi
+
+# If somthing can fail it should ahve a try and except statement
 
 
 
