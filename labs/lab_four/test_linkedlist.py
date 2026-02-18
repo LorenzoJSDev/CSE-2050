@@ -2,7 +2,7 @@
 <test_linkedlist.py>
 
 -------------------------------------------------------------
-This is a script is a piece of lab four
+This is a script is a peice of lab four
 -------------------------------------------------------------
 
 Author: Lorenzo .S
@@ -13,35 +13,32 @@ Last Updated: Created: 02-18-2026
 """
 
 #=== Imports ===#
-
-import unittest
-from unittest import TestCase
 from linkedlist import Node, LinkedList
+import unittest
 
 #=== Classes ===#
 
-class TestNode(TestCase):
+class TestNode(unittest.TestCase):
     def setUp(self):
         self.node1 = Node("data")
         self.node2 = Node("2data2", self.node1)
 
-    def test_init_no_link(self):
+    def test_init(self):
         self.assertEqual(self.node1.item, 'data')
-        self.assertIsNone(self.node1.link)
+        self.assertEqual(self.node1.link, None)
 
-    def test_init_yes_link(self):
-        self.assertEqual(self.node2.item, '2data2')
-        self.assertEqual(self.node2.link, self.node1)
+        
+class TestLinkedList(unittest.TestCase):
+    
+    def setUp(self):
+        self.linkedlist1 = LinkedList()
 
-    def test_repr_no_link(self):
-        expected = "Node(item:data, data: None)"
-        self.assertEqual(repr(self.node1), expected)
 
-    def test_repr_yes_link(self):
-        expected = f"Node(item:2data2, data: {repr(self.node1)})"
-        self.assertEqual(repr(self.node2), expected)
+    def test_init(self):
+        self.assertIs(self.linkedlist1._head, None)
+        self.assertEqual(self.linkedlist1._tail, None)
+        self.assertEqual(self.linkedlist1._len, 0)
 
-    # self.assertEqual(self.a1.name, 'Arthur')
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()
+

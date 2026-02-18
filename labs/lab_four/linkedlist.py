@@ -12,33 +12,45 @@ Last Updated: Created: 02-18-2026
 
 """
 #=== Imports ===#
-from typing import Optional
+from typing import Optional, Any, Iterable
 
 #=== Classes ===#
 
 
 class Node:
     def __init__(self, item, link: Optional['Node'] = None) -> None:
-        """
-        Docstring for __init__
-        
-        :param self: Description
-        :param item: Description
-        :param link: Description
-        :type link: Optional['Node']
-        """
         self.item = item
         self.link = link
 
     def __repr__(self) -> str:
-        """
-        Docstring for __repr__
-        
-        :param self: Description
-        :return: Description
-        :rtype: str
-        """
         return f"Node(item:{self.item}, data: {self.link})"
 
 class LinkedList:
-    pass
+    def __init__(self, items: Optional[Iterable[Any]] = None) -> None:
+        self.items = items
+        self._head = Node | None
+        self._tail = Node | None
+        self._len = 0
+    
+    def __len__(self) -> int:
+        return self._len
+
+    def get_head(self) -> Any | None:
+        return self._head
+
+    def get_tail(self) -> Any | None:
+        return self._tail
+    
+    def add_last(self,item) -> None:
+        pass
+
+    def add_first(self,item) -> None:
+        pass
+
+    def remove_last(self) -> Any:
+        pass
+
+    def remove_first(self) -> Any:
+        pass
+
+
