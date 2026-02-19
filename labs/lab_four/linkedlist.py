@@ -6,7 +6,7 @@ This is a script is a peice of lab four
 -------------------------------------------------------------
 
 Author: Lorenzo .S
-Contributors: [" "]
+Contributors: ["Jerod Abraham"]
 Created: 02-18-2026
 Last Updated: Created: 02-18-2026
 
