@@ -27,10 +27,17 @@ class Node:
 
 class LinkedList:
     def __init__(self, items: Optional[Iterable[Any]] = None) -> None:
-        self.items = items
-        self._head = Node | None
-        self._tail = Node | None
+        self._head = None
+        self._tail = None 
         self._len = 0
+
+        if items is not None: 
+            for item in items: 
+                self.add_last(item)
+        else:
+            self.items = None
+
+        return
     
     def __len__(self) -> int:
         return self._len
@@ -41,16 +48,51 @@ class LinkedList:
     def get_tail(self) -> Any | None:
         return self._tail
     
-    def add_last(self,item) -> None:
-        pass
-
     def add_first(self,item) -> None:
-        pass
+        self._head = Node(item, self._head)
+        if self._tail is None: 
+            self._tail = self._head
+        self._len += 1
 
-    def remove_last(self) -> Any:
-        pass
+    
+    def add_last(self,item) -> None:
+        if self._head is None:
+            self.add_first(item)
+        else:
+            self._tail.link = Node(item)
+            self._tail = self._tail.link
+            self._len += 1
+
 
     def remove_first(self) -> Any:
-        pass
+        if self._head is None:
+            raise RuntimeError("Cannot remove_first from an empty LinkedList")
+
+        item = self._head.item
+        self._head = self._head.link
+
+        if self._head is None:
+            self._tail = None
+
+        self._len -= 1
+        return item
+
+
+    def remove_last(self) -> Any:
+        if self._head is None:
+            raise RuntimeError("Cannot remove_last from an empty LinkedList")
+        if self._head is self._tail:
+            return self.remove_first()
+        currentnode = self._head
+        while currentnode.link is not self._tail:
+            currentnode = currentnode.link
+        item = self._tail.item
+        self._tail = currentnode
+        self._tail.link = None
+        self._len -= 1
+        return item
+
+
+   
 
 
