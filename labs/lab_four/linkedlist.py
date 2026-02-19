@@ -18,15 +18,43 @@ from typing import Optional, Any, Iterable
 
 
 class Node:
+    """
+    Docstring for Node
+    """
     def __init__(self, item, link: Optional['Node'] = None) -> None:
+        """
+        Docstring for __init__
+        
+        :param self: Description
+        :param item: Description
+        :param link: Description
+        :type link: Optional['Node']
+        """
         self.item = item
         self.link = link
 
     def __repr__(self) -> str:
+        """
+        Docstring for __repr__
+        
+        :param self: Description
+        :return: Description
+        :rtype: str
+        """
         return f"Node(item:{self.item}, data: {self.link})"
 
 class LinkedList:
+    """
+    Docstring for LinkedList
+    """
     def __init__(self, items: Optional[Iterable[Any]] = None) -> None:
+        """
+        Docstring for __init__
+        
+        :param self: Description
+        :param items: Description
+        :type items: Optional[Iterable[Any]]
+        """
         self._head = None
         self._tail = None 
         self._len = 0
@@ -40,15 +68,42 @@ class LinkedList:
         return
     
     def __len__(self) -> int:
+        """
+        Docstring for __len__
+        
+        :param self: Description
+        :return: Description
+        :rtype: int
+        """
         return self._len
 
     def get_head(self) -> Any | None:
+        """
+        Docstring for get_head
+        
+        :param self: Description
+        :return: Description
+        :rtype: Any | None
+        """
         return self._head
 
     def get_tail(self) -> Any | None:
+        """
+        Docstring for get_tail
+        
+        :param self: Description
+        :return: Description
+        :rtype: Any | None
+        """
         return self._tail
     
     def add_first(self,item) -> None:
+        """
+        Docstring for add_first
+        
+        :param self: Description
+        :param item: Description
+        """
         self._head = Node(item, self._head)
         if self._tail is None: 
             self._tail = self._head
@@ -56,6 +111,12 @@ class LinkedList:
 
     
     def add_last(self,item) -> None:
+        """
+        Docstring for add_last
+        
+        :param self: Description
+        :param item: Description
+        """
         if self._head is None:
             self.add_first(item)
         else:
@@ -65,6 +126,13 @@ class LinkedList:
 
 
     def remove_first(self) -> Any:
+        """
+        Docstring for remove_first
+        
+        :param self: Description
+        :return: Description
+        :rtype: Any
+        """
         if self._head is None:
             raise RuntimeError("Cannot remove_first from an empty LinkedList")
 
@@ -79,6 +147,13 @@ class LinkedList:
 
 
     def remove_last(self) -> Any:
+        """
+        Docstring for remove_last
+        
+        :param self: Description
+        :return: Description
+        :rtype: Any
+        """
         if self._head is None:
             raise RuntimeError("Cannot remove_last from an empty LinkedList")
         if self._head is self._tail:
