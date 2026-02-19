@@ -55,7 +55,7 @@ class TestNode(unittest.TestCase):
         
         :param self: Description
         """
-        expected = "Node(item:data, data: None)"
+        expected = "Node(data)"
         self.assertEqual(repr(self.node1), expected)
 
     def test_repr_yes_link(self):
@@ -64,7 +64,7 @@ class TestNode(unittest.TestCase):
         
         :param self: Description
         """
-        expected = f"Node(item:2data2, data: {repr(self.node1)})"
+        expected = f"Node(2data2)"
         self.assertEqual(repr(self.node2), expected)
 
         
@@ -97,84 +97,97 @@ class TestLinkedList(unittest.TestCase):
         self.assertIsNone(self.LL1.get_tail())
 
         # LL2 tests
-        self.assertEqual(self.LL2.__len__(), 3) # Get length of LL1
-        self.assertEqual(self.LL2.get_head().item, 'a') # Test item of _head Node in LL1
-        self.assertEqual(self.LL2.get_tail().item, 'c') # Test item of _tail Node in LL1
+        self.assertEqual(self.LL2.__len__(), 3) # Get length of LL2
+        self.assertEqual(self.LL2.get_head(), 'a') # Test item of _head Node in LL2
+        self.assertEqual(self.LL2.get_tail(), 'c') # Test item of _tail Node in LL2
+
+        # LL3 tests
+        self.assertEqual(self.LL3.__len__(), 10) # Get length of LL3
+        self.assertEqual(self.LL3.get_head(), 0) # Test item of _head Node in LL3
+        self.assertEqual(self.LL3.get_tail(), 9) # Test item of _tail Node in LL3
+
 
 
     def test_add_last(self):
-        """
-        Docstring for test_add_last
-        
-        :param self: Description
-        """
+        """Docstring for test_add_last"""
         # LL1 tests
         for i in range(1, 6):
             self.LL1.add_last(i)
             self.assertEqual(len(self.LL1), i)
-            self.assertEqual(self.LL1.get_head().item, 1)
-            self.assertEqual(self.LL1.get_tail().item, i)
+            self.assertEqual(self.LL1.get_head(), 1)
+            self.assertEqual(self.LL1.get_tail(), i)
 
     def test_add_first(self):
-        """
-        Docstring for test_add_first
-        
-        :param self: Description
-        """
+        """ Docstring for test_add_first"""
         # LL1 tests
         for i in range(1,6):
             self.LL1.add_first(i)
             self.assertEqual(len(self.LL1),i)
-            self.assertEqual(self.LL1.get_head().item,i)
-            self.assertEqual(self.LL1.get_tail().item, 1)
+            self.assertEqual(self.LL1.get_head(),i)
+            self.assertEqual(self.LL1.get_tail(), 1)
 
     def test_remove_first(self):
-        """
-        Docstring for test_remove_first
-        
-        :param self: Description
-        """
         expected_values = ['a', 'b', 'c']
         original_len = len(self.LL2)
 
         for i in range(original_len):
-            removed = self.LL2.remove_first()
-            self.assertEqual(removed, expected_values[i])
+            removed_node = self.LL2.remove_first()
+
+            # remove_first now returns a Node
+            self.assertEqual(removed_node, expected_values[i])
+
             self.assertEqual(len(self.LL2), original_len - i - 1)
+
             if len(self.LL2) == 0:
                 self.assertIsNone(self.LL2.get_head())
                 self.assertIsNone(self.LL2.get_tail())
             else:
-                self.assertEqual(self.LL2.get_head().item,expected_values[i + 1])
-                self.assertEqual(self.LL2.get_tail().item,expected_values[-1])
-        
-        # Tests for RunTimeError
+                self.assertEqual(
+                    self.LL2.get_head(),
+                    expected_values[i + 1]
+                )
+                self.assertEqual(
+                    self.LL2.get_tail(),
+                    expected_values[-1]
+                )
+
+    # RuntimeError test
         with self.assertRaises(RuntimeError):
             self.LL2.remove_first()
 
+
     def test_remove_last(self):
-        """
-        Docstring for test_remove_last
-        
-        :param self: Description
-        """
         expected_values = ['a', 'b', 'c']
         original_len = len(self.LL2)
 
         for i in range(original_len):
-            removed = self.LL2.remove_last()
-            self.assertEqual(removed, expected_values[original_len - 1 - i])
+            removed_node = self.LL2.remove_last()
+
+            # remove_last now returns a Node
+            self.assertEqual(
+                removed_node,
+                expected_values[original_len - 1 - i]
+            )
+
             self.assertEqual(len(self.LL2), original_len - i - 1)
+
             if len(self.LL2) == 0:
                 self.assertIsNone(self.LL2.get_head())
                 self.assertIsNone(self.LL2.get_tail())
             else:
-                self.assertEqual(self.LL2.get_head().item, expected_values[0])
-                self.assertEqual(self.LL2.get_tail().item,expected_values[original_len - 2 - i])
-        
-        # Tests for RunTimeError
+                self.assertEqual(
+                    self.LL2.get_head(),
+                    expected_values[0]
+                )
+                self.assertEqual(
+                    self.LL2.get_tail(),
+                    expected_values[original_len - 2 - i]
+                )
+
+        # RuntimeError test
         with self.assertRaises(RuntimeError):
             self.LL2.remove_last()
+
  
 
 
