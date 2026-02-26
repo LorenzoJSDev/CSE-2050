@@ -26,6 +26,9 @@ Last Updated: Created: 02-18-2026
 
 #---- 02-18-2026 Lecuture Notes ----#
 
+from dataclasses import dataclass
+
+
 class Stack:
     """ 
     TBD
@@ -39,8 +42,10 @@ class Queue:
     Definition:
 
     Main operations:
-        * enqueue
-        * dequeue
+        * enqueue(element)
+        * dequeue(element)
+
+    Enqueue(new element) --- > (Queue) ---> Dequeue(old element)
 
     Problem: dequeue runs in O(n), which is not good.
     """
@@ -70,6 +75,20 @@ class LazyQueue(Queue):
     Defintion: 
     A subclass of Queue that implement lazy dequeue
     modifies the dequeue function in order to run in O(1) not O(n)
+
+
+    Instead of actullay removing element from list, it changes the head by one
+    
+    
+    [1,2,3,4,5,6]
+     ^
+     Head
+
+    Dequeue()
+
+    [1,2,3,4,5,6]
+       ^
+       New Head
     """
 
     def __init__(self):
@@ -105,7 +124,9 @@ class Deque(Stack and Queue):
         * addlast(item)     O(1)
         * removefirst(item) O(n)
         * removelast(item)  O(1)
-        * len   
+    
+        
+
     """
 
     pass
@@ -123,6 +144,30 @@ class LinkedList:
     Problems:
 
     Nodes can only access prevoius Nodes
+
+
+    Review:
+
+    Each element is a seperate object and they will be linked like a chain
+
+    [node1(data,none),node2(data,points to node1)]
+
+    given [node1,node2,node3,node4,node5]
+            ^
+            Head
+
+    add_first(node0)
+
+    now [node0,node2,node3,node4,node5]
+            ^   
+            New head
+
+    node2 now needs to point towards 
+
+
+
+
+
     """
 
     class Node:
@@ -147,3 +192,53 @@ class LinkedList:
             return
 
     
+#---- 02-20-2026 Lecuture Notes ----#
+
+class DoublyLinkedList:
+    """
+    Like a linked list but the nodes save both the previous node and the next node in the list
+
+    Four Main Operations:
+        * addfirst(item)    O(n) adds an item to the front of the deque
+        * addlast(item)     O(1)
+        * removefirst(item) O(n)
+        * removelast(item)  O(1)
+    """
+
+    class Node:
+        def __init__(self):
+            self.data = None
+            self.next = None
+            self.prev = None
+
+
+    def __init__(self):
+        self._head = None
+        self._tail = None
+        self._len = 0
+
+    def add_first(self):
+
+        pass
+
+    def remove_first(self):
+        """
+        
+        """
+
+        self._head.next = self._head
+        self._head.prev = None
+        pass
+
+    def add_last(self):
+        """
+        
+        """
+
+        self._tail.next = DoublyLinkedList.Node("data",self._tail,None)
+        self._tail = self._tail.next
+
+    def remove_last(self):
+        pass
+
+    pass
