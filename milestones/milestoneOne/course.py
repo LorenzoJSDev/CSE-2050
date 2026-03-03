@@ -4,7 +4,7 @@
 student.py
 -------------
 
-Descrition: Contains the student class for the milestone One project
+Description: Contains the student class for the milestone One project
 
 Author: Jerod Abraham
 Contributors: Lorenzo .S
@@ -14,6 +14,7 @@ Status: Development (alpha)
 
 TO DO:
     * Add __str__ method
+    * Make Course.get_student_count() more efficient?
 """
 
 # ===== Imports =====
@@ -40,7 +41,7 @@ class Course:
     Contributor(s): Lorenzo .S
     """
     
-    def __init__(self, course_code: str, credits: int, students: list = []):
+    def __init__(self, course_code: str, course_credits: int, students: list = None):
         """
         Docstring for __init__
         
@@ -49,17 +50,19 @@ class Course:
         Author: Jerod Abraham
         Contributor(s): Lorenzo .S
         """
+        if students is None:
+            students = []
         self.course_code = course_code
-        self.credits = credits
-        self.students = []
+        self.credits = course_credits
+        self.students = students
 
 
 
     def add_student(self, student: Student):
         """
-        Docstring for add_student
+        Docstring for Course.add_student()
         
-        Description:
+        Description: TBD
 
         Author: Jerod Abraham
         Contributor(s): Lorenzo .S
@@ -67,14 +70,16 @@ class Course:
         
         if student not in self.students:
             self.students.append(student)
-            
-            student.enroll()
+        else:
+            raise ValueError(f"Student {student} already enrolled in course {self.course_code}")
         
     def get_student_count(self):
         """
-        Docstring for get_student_count
-        
-        :param self: Description
+        Docstring for Course.get_student_count()
+
+        Description:
+
+        Author: Jerod Abraha
         """
         return len(self.students)
         

@@ -4,7 +4,7 @@
 student.py
 -------------
 
-Descrition: Contains the student class for the milestone One project
+Description: Contains the student class for the milestone One project
 
 Author: Lorenzo Julian Serrano
 Contributors:
@@ -39,15 +39,14 @@ class Student:
 
     Contributor(s): "Lorenzo .J Serrano"
     """
-    
-    GRADE_POINTS = {
-    'A'  : 4.0,  'A-' : 3.7,
-    'B+' : 3.3,  'B'  : 3.0,  'B-' : 2.7,
-    'C+' : 2.3,  'C'  : 2.0,  'C-' : 1.7,
-    'D'  : 1.0,
-    'F'  : 0.0
-    }
 
+    GRADE_POINTS = {
+        'A': 4.0, 'A-': 3.7,
+        'B+': 3.3, 'B': 3.0, 'B-': 2.7,
+        'C+': 2.3, 'C': 2.0, 'C-': 1.7,
+        'D': 1.0,
+        'F': 0.0
+    }
 
     def __init__(self, student_id: str, name: str, courses: dict = {}):
         """
@@ -60,9 +59,8 @@ class Student:
         self.student_id = student_id
         self.name = name
         self.courses = courses
-    
 
-    def enroll(self, course:Course, grade: str):
+    def enroll(self, course: Course, grade: str):
         """
         Docstring for Student.enroll() method
 
@@ -70,8 +68,8 @@ class Student:
 
         Author: Lorenzo .S
         """
-        
-        if self.courses[course] not in self.courses: 
+
+        if self.courses[course] not in self.courses:
             if grade in self.GRADE_POINTS:
                 self.courses[course] = grade
                 course.add_student(self)
@@ -79,16 +77,15 @@ class Student:
                 raise ValueError(f"{grade} is not a valid grade input")
         else:
             raise ValueError(f"Student is already enrolled in '{course}'.")
-        
-        return
 
+        return
 
     def update_grade(self, course: Course, grade: str):
         """
         Docstring for Student.update_grade() method
 
         Description: Updates a selected course_object:"grade" key value pair in the self.courses dictionary if the key exists in self.courses
-        
+
         Author: Lorenzo .S
         """
 
@@ -96,11 +93,10 @@ class Student:
             self.courses[course] = grade
         else:
             raise ValueError(f"Student is not enrolled in '{course}'.")
-        
+
         return
 
     def calculate_gpa(self):
-
 
         pass
 
