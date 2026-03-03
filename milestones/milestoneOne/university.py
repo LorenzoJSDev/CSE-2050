@@ -15,13 +15,17 @@ class University:
         return self.courses[course_code]
     
     def add_student(self, student_id, name):
+        """
+        """
         pass
 
     def get_student(self, student_id):
+        """
+        """
         pass
 
     def get_course(self, course_code):
-        return self.courses.gen(course_code):
+        return self.courses.gen(course_code)
 
     def get_course_enrollment(self, course_code):
         course = self.get_course(course_code)
