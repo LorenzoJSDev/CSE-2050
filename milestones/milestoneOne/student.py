@@ -18,7 +18,10 @@ TO DO:
 
 class Student:
     """
-    TBD
+    Docstring for Student class
+
+    Description: TBD
+        
     """
     def __init__(self, student_id: str, name: str, courses: dict = {}):
         """
@@ -31,11 +34,38 @@ class Student:
 
     def enroll(self, course: object, grade:str):
         """
-        TBD
-        """
+        Docstring for Student.enroll() method
 
-        self.courses[course] = grade
-        pass
+        Description: Adds a course_object:"grade" key value pair to self.courses dictionary if the key does not exist in self.courses
+        """
+        
+        if self.courses[course] not in self.courses: 
+            self.courses[course] = grade
+        else:
+            raise ValueError(f"Student is already enrolled in '{course}'.")
+        
+        return
+
 
     def update_grade(self, course: object, grade: str):
+        """
+        Docstring for Student.update_grade() method
+
+        Description: Updates a selected course_object:"grade" key value pair in the self.courses dictionary if the key exists in self.courses
+        """
+
+        if self.courses[course] in self.courses:
+            self.courses[course] = grade
+        else:
+            raise ValueError(f"Student is not enrolled in '{course}'.")
         
+        return
+
+    def calculate_gpa(self):
+        pass
+
+    def get_courses(self):
+        pass
+
+    def get_course_info(self):
+        pass
