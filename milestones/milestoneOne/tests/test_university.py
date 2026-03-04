@@ -46,6 +46,8 @@ class TestUniversity(unittest.TestCase):
         self.student1 = Student("STU00001","Student_1")
         self.student2 = Student("STU00002","Student_2")
 
+        return
+
+    # ---- Test University.__init__() ---- #
 
 
-        pass
