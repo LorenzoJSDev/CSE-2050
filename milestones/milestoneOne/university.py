@@ -69,7 +69,7 @@ class University:
             raise ValueError(f"Student_ID {student_id} must be a string")
         elif len(student_id) != 8:
             raise ValueError(f"Student_ID {student_id} must be 8 characters long")
-        elif student_id[0:2] != "STU":
+        elif student_id[0:3] != "STU":
             raise ValueError(f"Student_ID {student_id} must start with STU")
         else:
             student = Student(student_id, name)
@@ -92,7 +92,7 @@ class University:
             - Description: Returns the course object from the self.courses dictionary.
             - Author: Lorenzo .S
         """
-        return self.courses.gen(course_code)
+        return self.courses.get(course_code)
 
     def get_course_enrollment(self, course_code):
         course = self.get_course(course_code)
@@ -101,7 +101,13 @@ class University:
         return 0
 
     def students_in_class(self, course_code):
+        """
+        Docstring for University.students_in_class()
+            - Description: Returns the list of students in a specific course
+            - Author: Jerod Abraham
+            - Contributor(s): Lorenzo .S
+        """
         course = self.get_course(course_code)
         if course:
-            return course.get_students()
+            return course.students
         return []

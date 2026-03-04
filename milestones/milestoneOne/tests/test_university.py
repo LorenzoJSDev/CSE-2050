@@ -38,16 +38,20 @@ class TestUniversity(unittest.TestCase):
         #University Objects
         self.university1 = University()
 
+        #Student Objects
+        self.student1 = Student("STU00001", "Student_1")
+
     # ---- Test University.__init__() ---- #
     def test_add_course(self):
         """
         Docstring for TestUniversity.test_add_course()
             - Description: Tests if a course can be added and stored successfully
             - Author: Jerod Abraham
+            - Contributor(s): Lorenzo .S
         """
         course1 = self.university1.add_course("CSE2050", 3)
         self.assertEqual(course1.course_code, "CSE2050")
-        self.assertEqual(course1.credits, 3)
+        self.assertEqual(course1.course_credits, 3)
         self.assertIn("CSE2050", self.university1.courses)
 
     def test_duplicate_course(self):
@@ -66,10 +70,11 @@ class TestUniversity(unittest.TestCase):
         Docstring for TestUniversity.test_add_student()
             - Description: Tests if a student can be added and stored successfully
             - Author: Jerod Abraham
+            - Contributor(s): Lorenzo .S
         """
-        student1 = self.university1.add_student("STU00001", "Student_1")
-        self.assertEqual(student1.student_id, "STU00001")
-        self.assertIn("STU00001", self.university1.students)
+        self.university1.add_student(self.student1.student_id,self.student1.name)
+        self.assertEqual(self.student1.student_id, "STU00001")
+        self.assertIn("STU00001", self.university1.students.keys())
     
     def test_duplicate_student(self):
         """
