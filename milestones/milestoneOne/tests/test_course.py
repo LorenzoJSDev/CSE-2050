@@ -29,7 +29,7 @@ class TestCourse(unittest.TestCase):
     def setUp(self):
         """
         Docstring for TestCourse.setUp()
-            - Description: Runs before every test, so every test has access to
+            - Description: Runs before every test, so every test has access to created objects.
             - Author: Lorenzo .S
         """
 
@@ -95,3 +95,5 @@ class TestCourse(unittest.TestCase):
 
 
 
+if __name__ == "__main__":
+    unittest.main()

@@ -7,129 +7,147 @@ test_student.py
 Description: Contains the test cases for the Student class.
 
 Author: Lorenzo .S
+Contributors:
 Date Created: 03-03-2026
 Status: Development
 """
 
+# ===== Imports =====
+
+# Standard library
 import unittest
 
+# Third-party
+
+
+# Local application (your project modules)
 from milestones.milestoneOne.course import Course
 from milestones.milestoneOne.student import Student
 
 
+# ==== Classes ==== #
+
 class TestStudent(unittest.TestCase):
 
     def setUp(self):
-        # Courses
+        """
+        Docstring for TestStudent.setUp()
+            - Description: Runs before every test, so every test has access to
+            - Author: Lorenzo .S
+        """
+
+        #Test Courses
         self.course1 = Course("CSE2050", 3, [])
-        self.course2 = Course("MATH1010", 4, [])
+        self.course2 = Course("MATH1010", 2, [])
 
-        # Students
-        # Start each student with no courses (clean tests)
-        self.student1 = Student("STU100", "Student1")
-        self.student2 = Student("STU200", "Student2")
+        #Test Students
+        self.student1 = Student("STU00001", "Student_1")
+        self.student2 = Student("STU00002", "Student_2", {self.course1:"A"})
 
-    # ---------- __init__ / attributes ----------
+    # ---- Test Student.__init__() ---- #
 
-    def test_init_sets_fields(self):
-        self.assertEqual(self.student1.student_id, "STU100")
-        self.assertEqual(self.student1.name, "Student1")
-        self.assertIsInstance(self.student1.courses, dict)
-        self.assertEqual(len(self.student1.courses), 0)
+    def test_init(self):
+        """
+        Docstring for TestStudent.test_init()
+            - Description: Tests that the constructor correctly initializes
+            - Author: Lorenzo .S
+        """
+        #Student1
+        self.assertEqual(self.student1.student_id, "STU00001")
+        self.assertEqual(self.student1.name, "Student_1")
+        self.assertEqual(self.student1.courses, {})
 
-    def test_init_uses_given_courses_dict(self):
-        preset = {self.course1: "A"}
-        s = Student("STU300", "Student3", preset)
-        self.assertIn(self.course1, s.courses)
-        self.assertEqual(s.courses[self.course1], "A")
+        #Student2
+        self.assertEqual(self.student2.student_id, "STU00002")
+        self.assertEqual(self.student2.name, "Student_2")
+        self.assertEqual(self.student2.courses, {self.course1:"A"})
+        self.assertEqual(self.student2.courses[self.course1], "A")
 
-    # ---------- __str__ ----------
+    # ---- Test Student.enroll() ---- #
 
-    def test_str_contains_id_and_name(self):
-        s = str(self.student1)
-        self.assertIn("STU100", s)
-        self.assertIn("Student1", s)
+    def test_enroll(self):
+        """
+        Docstring for TestStudent.test_enroll()
+            - Description: Enrolls the student with the given course
+            - Author: Lorenzo .S
+        """
+        #Student1
+        self.assertEqual(self.student1.courses,{})
+        self.student1.enroll(self.course1,"A")
+        self.assertEqual(self.student1.courses,{self.course1:"A"})
 
-    # ---------- enroll ----------
+        #Student2
+        self.assertEqual(self.student2.courses,{self.course1:"A"})
+        self.student2.enroll(self.course2,"B")
+        self.assertEqual(self.student2.courses,{self.course1:"A",self.course2:"B"})
 
-    def test_enroll_adds_course_and_grade(self):
-        self.student1.enroll(self.course1, "A")
-        self.assertIn(self.course1, self.student1.courses)
-        self.assertEqual(self.student1.courses[self.course1], "A")
+        #Student2 was not properly enrolled in course 1 so we can not expect them to be in the course roster student list
+        self.assertEqual(self.course1.students, [self.student1])
+        self.assertEqual(self.course2.students, [self.student2])
 
-    def test_enroll_calls_course_add_student(self):
-        # If Course tracks students, enrolling should add the student to the course too.
-        self.student1.enroll(self.course1, "A")
+        return
 
-        # This part depends on your Course implementation.
-        # Common patterns: course.students list OR get_students() method.
-        if hasattr(self.course1, "students"):
-            self.assertIn(self.student1, self.course1.students)
-        elif hasattr(self.course1, "get_students"):
-            self.assertIn(self.student1, self.course1.get_students())
-        else:
-            # If Course doesn't expose students, at least ensure no exception occurred
-            self.assertTrue(True)
+    def test_enroll_already_enrolled(self):
+        """
+        Docstring for TestStudent.test_enroll_already_enrolled()
+            - Description: Tests that a ValueError is raised if the student is already enrolled in the course.
+            - Author: Lorenzo .S
+        """
+        self.assertEqual(self.student2.courses, {self.course1: "A"})
+        self.assertRaises(ValueError, self.student2.enroll, self.course1,"B")
 
-    def test_enroll_invalid_grade_raises(self):
-        with self.assertRaises(ValueError):
-            self.student1.enroll(self.course1, "Z")
+    def test_enroll_invalid_grade(self):
+        """
+        Docstring for TestStudent.test_enroll_invalid_grade()
+            - Description: Tests that a ValueError is raised if the student is enrolled with an invalid grade value.
+            - Author: Lorenzo .S
+        """
+        self.assertEqual(self.student2.courses, {self.course1: "A"})
+        self.assertRaises(ValueError, self.student2.enroll, self.course2, "8")
+        self.assertRaises(ValueError, self.student2.enroll, self.course2, 8)
+        self.assertRaises(ValueError, self.student2.enroll, self.course2, True)
 
-    def test_enroll_same_course_twice_raises(self):
-        self.student1.enroll(self.course1, "A")
-        with self.assertRaises(ValueError):
-            self.student1.enroll(self.course1, "A-")
+    # ---- Test Student.update_grade() ---- #
 
-    # ---------- update_grade ----------
+    def test_update_grade(self):
+        """
+        Docstring for TestStudent.test_update_grade()
+            - Description: Tests that Student.update_grade() works as expected.
+            - Author: Lorenzo .S
+        """
+        self.assertEqual(self.student2.courses, {self.course1: "A"})
+        self.assertEqual(self.student2.courses[self.course1], "A")
+        self.student2.update_grade(self.course1, "B")
+        self.assertEqual(self.student2.courses, {self.course1: "B"})
 
-    def test_update_grade_changes_grade(self):
-        self.student1.enroll(self.course1, "C")
-        self.student1.update_grade(self.course1, "A-")
-        self.assertEqual(self.student1.courses[self.course1], "A-")
+    # ---- Test Student.calculate_gpa() ---- #
 
-    def test_update_grade_invalid_grade_raises(self):
-        self.student1.enroll(self.course1, "C")
-        with self.assertRaises(ValueError):
-            self.student1.update_grade(self.course1, "Z")
+    def test_calculate_gpa(self):
+        """
+        Docstring for TestStudent.test_calculate_gpa()
+            - Description: Tests that Student.calculate_gpa() works as expected.
+            - Author: Lorenzo .S
+        """
+        self.assertEqual(self.student2.calculate_gpa(), 4.0)
+        self.assertEqual(self.student1.calculate_gpa(), 0.0)
 
-    def test_update_grade_not_enrolled_raises(self):
-        with self.assertRaises(ValueError):
-            self.student1.update_grade(self.course1, "B")
 
-    # ---------- calculate_gpa ----------
+    # ---- Test Student.get_course_info() ---- #
 
-    def test_calculate_gpa_single_course(self):
-        # course1 credits = 3, grade A = 4.0
-        self.student1.enroll(self.course1, "A")
-        self.assertAlmostEqual(self.student1.calculate_gpa(), 4.0, places=2)
+    def test_get_course_info(self):
+        """
+        Docstring for TestStudent.get_course_info()
+            - Description: Tests that Student.get_course_info() works as expected.
+            - Author: Lorenzo .S
+        """
+        self.assertEqual(self.student2.get_course_info(), [{'course_code': 'CSE2050', 'grade': 'A', 'credits': 3}])
+        self.student2.enroll(self.course2,"B")
+        self.assertEqual(self.student2.get_course_info(), [{'course_code': 'CSE2050', 'grade': 'A', 'credits': 3}, {'course_code': 'MATH1010', 'grade': 'B', 'credits': 2}])
 
-    def test_calculate_gpa_multiple_courses_weighted(self):
-        # course1: 3 credits, A (4.0) => 12.0 points
-        # course2: 4 credits, B (3.0) => 12.0 points
-        # total points = 24.0, total credits = 7 => GPA = 24/7 = 3.428571...
-        self.student1.enroll(self.course1, "A")
-        self.student1.enroll(self.course2, "B")
-
-        expected = 24.0 / 7.0
-        self.assertAlmostEqual(self.student1.calculate_gpa(), expected, places=4)
-
-    def test_calculate_gpa_no_courses_raises(self):
-        # Your current implementation will divide by zero if no courses exist.
-        with self.assertRaises(ZeroDivisionError):
-            self.student1.calculate_gpa()
-
-    # ---------- get_courses ----------
-
-    def test_get_courses_returns_keys_view(self):
-        self.student1.enroll(self.course1, "A")
-        keys = self.student1.get_courses()
-
-        # keys is dict_keys, but we can treat it like an iterable
-        self.assertIn(self.course1, list(keys))
-
-    def test_get_courses_empty(self):
-        self.assertEqual(list(self.student1.get_courses()), [])
-
+        #Student1
+        self.assertEqual(self.student1.get_course_info(), [])
+        return
 
 if __name__ == "__main__":
     unittest.main()
+

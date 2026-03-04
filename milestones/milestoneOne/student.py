@@ -33,7 +33,7 @@ from .course import Course
 class Student:
     """
     Docstring for Student class
-        - Description: TBD
+        - Description: The student class for the milestone One project
         - Contributor(s): "Lorenzo .J Serrano"
     """
 
@@ -48,7 +48,7 @@ class Student:
     def __init__(self, student_id: str, name: str, courses: dict = None):
         """
         Docstring for Student.__init__() method
-            - Description: the constructor for Student class instances / objects
+            - Description: The constructor for Student class instances / objects
             - Author: Lorenzo .S
         """
         self.student_id = student_id
@@ -120,7 +120,7 @@ class Student:
         else:
             gpa = total_points/total_credits
 
-        return gpa
+        return round(gpa,2)
 
     def get_courses(self):
         """
@@ -133,10 +133,17 @@ class Student:
 
     def get_course_info(self):
         """
-        Docstring for Student.get_courses() method
+        Docstring for Student.get_course_info() method
             - Description: Returns a list of courses a student is enrolled in.
             - Author: Lorenzo .S
         """
+        courses_info = []
 
+        for course in self.courses:
+            courses_info.append({
+                "course_code": course.course_code,
+                "grade": self.courses[course],
+                "credits": course.course_credits
+            })
 
-        pass
+        return courses_info
