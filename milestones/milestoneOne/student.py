@@ -27,17 +27,14 @@ TO DO:
 
 
 # Local application (your project modules)
-from course import Course
-
+from .course import Course
 
 # ===== Classes =====
 class Student:
     """
     Docstring for Student class
-
-    Description: TBD
-
-    Contributor(s): "Lorenzo .J Serrano"
+        - Description: TBD
+        - Contributor(s): "Lorenzo .J Serrano"
     """
 
     GRADE_POINTS = {
@@ -48,28 +45,32 @@ class Student:
         'F': 0.0
     }
 
-    def __init__(self, student_id: str, name: str, courses: dict = {}):
+    def __init__(self, student_id: str, name: str, courses: dict = None):
         """
         Docstring for Student.__init__() method
-
-        Description: the constructor for Student class instances / objects
-
-        Author: Lorenzo .S
+            - Description: the constructor for Student class instances / objects
+            - Author: Lorenzo .S
         """
         self.student_id = student_id
         self.name = name
-        self.courses = courses
+        self.courses = {} if courses is None else courses
+
+    def __str__(self):
+        """
+        Docstring for Student.__str__() method
+            - Description: TBD
+            - Contributor(s): Lorenzo .J Serrano
+        """
+        return f"{self.student_id},{self.name}.{self.courses}"
 
     def enroll(self, course: Course, grade: str):
         """
         Docstring for Student.enroll() method
-
-        Description: Adds a course_object:"grade" key value pair to self.courses dictionary if the key does not exist in self.courses
-
-        Author: Lorenzo .S
+            - Description: Adds a course_object:"grade" key value pair to self.courses dictionary if the key does not exist in self.courses
+            - Author: Lorenzo .S
         """
 
-        if self.courses[course] not in self.courses:
+        if course not in self.courses.keys():
             if grade in self.GRADE_POINTS:
                 self.courses[course] = grade
                 course.add_student(self)
@@ -83,26 +84,59 @@ class Student:
     def update_grade(self, course: Course, grade: str):
         """
         Docstring for Student.update_grade() method
-
-        Description: Updates a selected course_object:"grade" key value pair in the self.courses dictionary if the key exists in self.courses
-
-        Author: Lorenzo .S
+            - Description: Updates a selected course_object:"grade" key value pair in the self.courses dictionary if the key exists in self.courses
+            - Author: Lorenzo .S
         """
 
-        if self.courses[course] in self.courses:
-            self.courses[course] = grade
+        if course in self.courses.keys():
+            if grade in self.GRADE_POINTS:
+                self.courses[course] = grade
+            else:
+                raise ValueError(f"{grade} is not a valid grade input")
         else:
             raise ValueError(f"Student is not enrolled in '{course}'.")
 
         return
 
     def calculate_gpa(self):
+        """
+        Docstring for Student.calculate_gpa() method
+            - Description: Calculates the GPA for this student.
+            - Author: Lorenzo .S
+        """
+        total_points = 0
+        total_credits = 0
 
-        pass
+        for course in self.courses.keys():
+
+            x = course.course_credits * self.GRADE_POINTS[self.courses[course]]
+
+            total_points += x
+
+            total_credits += course.course_credits
+
+        if total_points == 0 or total_credits == 0:
+            gpa = 0.0
+        else:
+            gpa = total_points/total_credits
+
+        return gpa
 
     def get_courses(self):
-        return list(self.courses.keys())
-        pass
+        """
+        Docstring for Student.get_courses() method
+            - Description: Returns a list of courses a student is enrolled in.
+            - Author: Lorenzo .S
+        """
+        return self.courses.keys()
+
 
     def get_course_info(self):
+        """
+        Docstring for Student.get_courses() method
+            - Description: Returns a list of courses a student is enrolled in.
+            - Author: Lorenzo .S
+        """
+
+
         pass

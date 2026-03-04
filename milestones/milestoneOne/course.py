@@ -4,7 +4,7 @@
 student.py
 -------------
 
-Description: Contains the student class for the milestone One project
+Description: Contains the course class for the milestone One project
 
 Author: Jerod Abraham
 Contributors: Lorenzo .S
@@ -26,7 +26,6 @@ TO DO:
 
 
 # Local application (your project modules)
-from student import Student
 
 
 # ===== Classes =====
@@ -53,12 +52,12 @@ class Course:
         if students is None:
             students = []
         self.course_code = course_code
-        self.credits = course_credits
+        self.course_credits = course_credits
         self.students = students
 
 
 
-    def add_student(self, student: Student):
+    def add_student(self, student: object):
         """
         Docstring for Course.add_student()
         

@@ -1,9 +1,43 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+university.py
+-------------
+
+Description: Contains the University class for the milestone One project
+
+Author: Jerod Abraham
+Contributors: Lorenzo .S
+Date Created: 03-03-2026
+Status: Development (alpha)
+
+"""
+
+# ===== Imports =====
+
+# Standard library
+
+
+# Third-party
+
+
+# Local application (your project modules)
+from .course import Course
+
+# ===== Classes =====
+
+
 class University:
     """
-    Docstring for University
+    Docstring for University class
 
-    Collaboration between Jerod Abraham and Lorenzo Serrano
+    Description: Contains the University class for the milestone One project
+
+    Author: Jerod Abraham
+    Contributors: Lorenzo .S
     """
+
+
     def __init__(self):
         self.students = {}
         self.courses = {}
