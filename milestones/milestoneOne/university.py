@@ -65,6 +65,12 @@ class University:
 
         if student_id in self.students.keys():
             raise ValueError(f"Student_ID {student_id} already exists in University object")
+        elif not isinstance(student_id, str):
+            raise ValueError(f"Student_ID {student_id} must be a string")
+        elif len(student_id) != 8:
+            raise ValueError(f"Student_ID {student_id} must be 8 characters long")
+        elif student_id[0:2] != "STU":
+            raise ValueError(f"Student_ID {student_id} must start with STU")
         else:
             student = Student(student_id, name)
             self.students[student_id] = student
