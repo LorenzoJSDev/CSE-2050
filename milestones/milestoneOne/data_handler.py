@@ -34,13 +34,13 @@ class DataHandler():
         - Author: Lorenzo .S
     """
 
-    def __init__(self, university_data, course_catalog) -> None:
+    def __init__(self, university_data_path, course_catalog_path) -> None:
         """
         Docstring for __init__
             - Description: TBD
             - Author: Lorenzo .S
 
         """
-
-        pass
+        self.university_data_path = university_data_path
+        self.course_catalog_path = course_catalog_path
 
