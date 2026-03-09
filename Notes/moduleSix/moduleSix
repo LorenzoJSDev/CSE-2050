@@ -1,0 +1,14 @@
+Should eb able to implement every example in module 5, every recursion practice, + fibinachi
+
+Mod 6
+* Know Binary search + Code Binary search (Pass Idex dont slice)
+* Know Bubble Sort, Insertion sort, slection sort, cocktail sort etc Know how to code and time complexities
+
+
+Binary Search is O(n) if slicing or O(logn) without slcing/ passing indecies
+
+Implement binary search
+
+implemetn all 3 sorting algos
+
+implement the adaptive version of bubble,selection and binary search(better search)

@@ -23,6 +23,12 @@ Last Updated: Created: 02-18-2026
 
 """
 
+def ADT():
+    """
+    Docstring
+
+    """
+
 
 #---- 02-18-2026 Lecuture Notes ----#
 
