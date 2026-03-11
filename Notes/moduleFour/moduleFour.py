@@ -350,6 +350,7 @@ class Queue(ABC):
         """
         return
 
+# Example of Queue Wrapper for List
 class LazyListQueue(Queue):
     """
     Docstring for moduleFour.LazyQueue(Queue)
@@ -532,6 +533,7 @@ class Deque(ABC):
         """
         return
 
+# Example of Deque Wrapper for List
 class ListDeque(Deque):
     """
     Docstring for moduleFour.ListDeque
@@ -573,6 +575,14 @@ class SinglyLinkedList:
         * LinkedList class
         * Node class
 
+        
+    Main Operations:
+        * add_last
+        * add_first
+        * remove_last
+        * remove_first
+        * len()
+
     SinglyLinkedList Diagram:
     SinglyLinkedList = node1(data,node2) --> node2(data,node3) ---> node3(data,None)
     !!!Note: This is not a list wrapper, these nodes are not stored within a list object!!!
@@ -584,14 +594,13 @@ class SinglyLinkedList:
     """
 
     @dataclass
-    class SinglyLinkedListNode:
-        """
-        Docstring for moduleFour.SinglyLinkedList.SinglyLinkedListNode
+    class ListNode:
+        """ Docstring for moduleFour.SinglyLinkedList.SinglyLinkedListNode
 
         Description:
-            -
-        The Node class does not have any methods, they are ment to just store and point
+            - The Node class does not have any methods, they are ment to just store and point
         """
+        
         def __init__(self,data,link=None):
             """
             Docstring for moduleFour.SinglyLinkedList.SinglyLinkedListNode.__init__()
@@ -609,32 +618,66 @@ class SinglyLinkedList:
         """
         self._head = None
         self._tail = None
-        self._size = 0
+        self._len = 0
 
     def add_first(self, item):
         """
         Docstring for moduleFour.SinglyLinkedList.add_first()
+
+        Description:
+            -
         """
-        self._head = SinglyLinkedList.SinglyLinkedListNode(item,self._head)
+        self._head = SinglyLinkedList.ListNode(item,self._head)
         if self._tail is None: self._tail = self._head
-        self._size += 1
+        self._len += 1
 
     def add_last(self, item):
-        self._tail.link = SinglyLinkedList.SinglyLinkedListNode(item)
+        """
+        Docstring for moduleFour.SinglyLinkedList.add_last()
+        """
+        if self._head is None:
+            self.add_first(item)
+        
+        self._tail.link = SinglyLinkedList.ListNode(item)
+        self._tail = self._tail.link
+        self._len += 1
 
-
-    def remove_first(self, item):
+    def remove_first(self):
         """
         Docstring for moduleFour.SinglyLinkedList.remove_first()
+        
+        Returns: Node Object!
         """
-        item = self._head.data
+        
+        item = self._head
         self._head = self._head.link
+        if self._head is None: self._tail = None
+        self._len -= 1
         return item
+        
+    def remove_last(self):
+        """
+        Docstring for moduleFour.SinglyLinkedList.remove_last()
 
-
-
-
-    
+        Returns: Data not Node object!
+        """
+        if self._head is self._tail:
+            return self.remove_first()
+        else:
+            current_node = self._head
+            while current_node.link is not self._tail:
+                current_node = current_node.link
+            item = self._tail.data
+            self._tail.link = None
+            self.length -= 1
+            return item
+        
+    def __len__(self):
+        """
+        Docstring for moduleFour.SinglyLinkedList.__len__()
+        """
+        return self._len
+   
 #---- 02-20-2026 Lecuture Notes ----#
 
 class DoublyLinkedList:
@@ -642,46 +685,81 @@ class DoublyLinkedList:
     Like a linked list but the nodes save both the previous node and the next node in the list
 
     Four Main Operations:
-        * addfirst(item)    O(n) adds an item to the front of the deque
+        * addfirst(item)    O(1) adds an item to the front of the deque
         * addlast(item)     O(1)
-        * removefirst(item) O(n)
+        * removefirst(item) O(1)
         * removelast(item)  O(1)
     """
 
+    @dataclass
     class Node:
-        def __init__(self):
-            self.data = None
-            self.next = None
-            self.prev = None
+        def __init__(self, data, prev = None, next= None):
+            self.data = data
+            self.prev = prev
+            self.next = next
 
+            if prev is not None:
+                self.prev.next = self
+            if next is not None:
+                self.next.prev = self
+            return
+            
 
     def __init__(self):
         self._head = None
         self._tail = None
         self._len = 0
 
-    def add_first(self):
-
-        pass
-
+    def add_first(self,value):
+        if self._head is None:
+            self._head = DoublyLinkedList.Node(value)
+            self._tail = self._head
+            self._len += 1
+        else:
+            self._head.prev = DoublyLinkedList.Node(value,None,self._head)
+            self._head = self._head.prev
+            self._len += 1
+        return
+    
+    def add_last(self,value):
+        if self._tail is None: 
+            self.add_first(value)
+        
+        else:
+            new_node = DoublyLinkedList.Node(value,self._tail,None)
+            self._tail.next = new_node
+            self._tail = self._tail.next
+            self._len += 1
+        return
+    
     def remove_first(self):
-        """
+        if self._head is None:
+            raise IndexError("Can not remove items from an empty list")
         
-        """
-
-        self._head.next = self._head
-        self._head.prev = None
-        pass
-
-    def add_last(self):
-        """
+        removed_node = self._head
         
-        """
-
-        self._tail.next = DoublyLinkedList.Node("data",self._tail,None)
-        self._tail = self._tail.next
-
+        if self._head == self._tail:
+            self._head = None
+            self._tail = None
+            self._len -= 1
+        else:
+            self._head = self._head.next
+            self._head.prev = None
+            self._len -= 1
+        
+        return removed_node
+    
     def remove_last(self):
-        pass
+        if self._tail is None:
+            raise IndexError("Can not remove items from an empty list")
+        
+        removed_node = self._tail
 
-    pass
+        if self._tail == self._head: 
+            self.remove_first()
+        else:
+            self._tail = self._tail.prev
+            self._tail.next = None
+            self._len -= 1
+        
+        return removed_node
