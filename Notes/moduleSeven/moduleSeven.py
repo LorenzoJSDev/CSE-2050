@@ -88,3 +88,5 @@ class MergeSort:
         pass
 
 
+# ---- Lecture One Notes ---- #
+
