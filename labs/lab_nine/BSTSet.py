@@ -16,7 +16,6 @@ class BSTSet:
 
 
 
-    # TODO: How should these methods call the BSTNode methods?
     def put(self, key):
         if self._head is None:
             self._head = BSTNode(key)
