@@ -1,5 +1,5 @@
 import unittest
-from BSTSet import BSTSet
+from labs.lab_nine.BSTSet import BSTSet
 
 class TestBSTSet(unittest.TestCase):
     def testPut(self):
