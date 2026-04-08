@@ -1,4 +1,4 @@
-from labs.lab_nine.BSTNode import BSTNode
+from BSTNode import BSTNode
 
 # Public interface: users only interact with the class BSTMap.
 # Methods in BSTSet often call BSTNode methods, which do the heavy lifting.
