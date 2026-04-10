@@ -22,4 +22,16 @@ Traversal Methods of a Tree from starting point:
     * In-Order traverse: Left -> Root -> Right
     * Post-Order traverse: Left -> Right -> Root
 
+Inserting Data into a binary tree:
+    * Right side: Every node greater than root
+    * Left side: Every node less than root
+
+Deleting a node:
+Worst case: O(n)
+O(Height)
+    * Leaf Node: Just set the parents side to None
+    * Parent with one child Node:
+    * Parent with two children Nodes: One left all the way right or One right all the way left
+
+
 """
